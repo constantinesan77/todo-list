@@ -1,8 +1,15 @@
 const Koa = require('koa')
+const logger = require('koa-logger')
 const serve = require('koa-static')
+const favicon = require('koa-favicon')
+
 
 const app = new Koa()
 const port = process.env.PORT || 3000
+//Dodawanie faviconu
+app.use(favicon('./client/favicon.ico'))
+// Logowanie wszystkich żądań na konsoli
+app.use(logger())
 
 app.use(serve('client'))
 
