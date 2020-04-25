@@ -37,6 +37,7 @@ addTaskForm.addEventListener('submit', (event) => {
         addTaskMsg.textContent = 'Pomyślnie dodano zadanie.'
         addTaskMsg.classList.add('is-success')
         addTaskTitle.value = ''
+        listTasks()
       })
       .catch((error) => {
         addTaskMsg.textContent = error.message
@@ -82,25 +83,4 @@ const listTasks = async () => {
   }  
   listTasks()
 
-  setTimeout(() => {
-    addTask()
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText)
-        }
   
-        addTaskMsg.textContent = 'Pomyślnie dodano zadanie.'
-        addTaskMsg.classList.add('is-success')
-        addTaskTitle.value = ''
-  
-        listTasks()
-      })
-      .catch(() => {
-        addTaskMsg.textContent = 'Wystąpił błąd podczas dodawania zadania. Spróbuj ponownie później.'
-        addTaskMsg.classList.add('is-danger')        
-      })
-      .finally(() => {
-        addTaskBtn.classList.remove('is-loading', 'is-disabled')
-        addTaskMsg.classList.remove('is-hidden')
-      })
-  }, 1000)
