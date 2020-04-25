@@ -2,15 +2,15 @@ const Koa = require('koa')
 const logger = require('koa-logger')
 const serve = require('koa-static')
 const favicon = require('koa-favicon')
-
+const storage = require('azure-storage')
 
 const app = new Koa()
 const port = process.env.PORT || 3000
-//Dodawanie faviconu
+
 app.use(favicon('./client/favicon.ico'))
-// Logowanie wszystkich żądań na konsoli
 app.use(logger())
 
+require('./store').init()
 app.use(serve('client'))
 
 const userRoutes = require('./routes/users')
